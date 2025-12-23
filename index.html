@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:radial-gradient(circle at top,#ffdde1,#ee9ca7,#a18cd1);
+  font-family:'Segoe UI',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.screen{
+  display:none;
+  text-align:center;
+  max-width:720px;
+  padding:30px;
+  animation:fadeUp 1.3s ease;
+}
+
+.active{display:block;}
+
+p{
+  font-size:24px;
+  line-height:1.8;
+  color:white;
+  text-shadow:0 3px 8px rgba(0,0,0,0.35);
+}
+
+button{
+  margin-top:35px;
+  padding:14px 45px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff5f9e;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+img{
+  max-width:260px;
+  border-radius:28px;
+  margin:25px 0;
+  box-shadow:0 0 35px rgba(255,255,255,0.8);
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(50px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* FLOWERS + HEARTS */
+.float{
+  position:absolute;
+  font-size:22px;
+  animation:fall 8s linear infinite;
+  opacity:0.9;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen active">
+  <p>🔒 Scan to unlock</p>
+  <button onclick="next()">Start</button>
+</div>
+
+<div class="screen">
+  <p>Pratyasha…<br>
+  tum meri zindagi mein<br>
+  ek pyari si roshni bankar aayi ho ✨</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <p>Jab sab kuch heavy lagta hai,<br>
+  tumhari ek smile sab halka kar deti hai 😊</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <p>Tumhari muskaan mere liye medicine hai,<br>
+  bina bole kaam kar jaati hai 💖</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <p>Main perfect nahi hoon,<br>
+  par tum meri life ka<br>
+  sabse khoobsurat hissa ho 🌸</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <img src="her.jpg">
+  <p>Is chehre ko dekh kar<br>
+  dil apne aap shaant ho jaata hai 💕</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <p>Tum kam bolti ho,<br>
+  par tumhari presence hi kaafi hoti hai 🌙</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<div class="screen">
+  <p>Aaj jo bhi hoon,<br>
+  usmein tumhari thodi si roshni zaroor hai ✨</p>
+  <button onclick="next()">Next</button>
+</div>
+
+<!-- FINAL UNIQUE SCREEN -->
+<div class="screen">
+  <p>
+    Ab bas ek chhoti si request…<br><br>
+    <strong>Tum smile karo 😊</strong><br>
+    kyunki tumhari smile hi<br>
+    meri is chhoti si duniya ka<br>
+    sabse khoobsurat hissa hai ❤️
+  </p>
+</div>
+
+<script>
+let i=0;
+const screens=document.querySelectorAll(".screen");
+
+function next(){
+  screens[i].classList.remove("active");
+  i++;
+  if(i<screens.length){
+    screens[i].classList.add("active");
+    floatItems();
+  }
+}
+
+function floatItems(){
+  const icons=["🌸","❤️"];
+  for(let j=0;j<8;j++){
+    let f=document.createElement("div");
+    f.className="float";
+    f.innerText=icons[Math.floor(Math.random()*icons.length)];
+    f.style.left=Math.random()*100+"vw";
+    f.style.animationDuration=(5+Math.random()*4)+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),9000);
+  }
+}
+
+const q=new URLSearchParams(window.location.search);
+if(q.get("key")!=="pratyasha"){
+  document.body.innerHTML="<h1 style='color:white'>🔒 Scan to unlock</h1>";
+}
+</script>
+
+</body>
+</html>
